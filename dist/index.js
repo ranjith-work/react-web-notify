@@ -100,19 +100,49 @@ function _unsupportedIterableToArray(r, a) {
   }
 }
 
+function styleInject(css, ref) {
+  if ( ref === void 0 ) ref = {};
+  var insertAt = ref.insertAt;
+
+  if (!css || typeof document === 'undefined') { return; }
+
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
+
+  if (insertAt === 'top') {
+    if (head.firstChild) {
+      head.insertBefore(style, head.firstChild);
+    } else {
+      head.appendChild(style);
+    }
+  } else {
+    head.appendChild(style);
+  }
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+}
+
+var css_248z = ".notification {\r\n\tdisplay: flex;\r\n\talign-items: center;\r\n\tpadding: 16px;\r\n\tborder-radius: 8px;\r\n\tbox-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);\r\n\topacity: 1;\r\n\tanimation: fadeIn 0.5s ease-in, fadeOut 0.5s ease-out forwards;\r\n\tanimation-delay: 0s, 4.5s; /* Delay the fadeOut animation */\r\n}\r\n\r\n.notification.success {\r\n\tbackground-color: #d4edda;\r\n\tborder-left: 4px solid #28a745;\r\n}\r\n\r\n.notification.error {\r\n\tbackground-color: #f8d7da;\r\n\tborder-left: 4px solid #dc3545;\r\n}\r\n\r\n.notification.warning {\r\n\tbackground-color: #fff3cd;\r\n\tborder-left: 4px solid #ffc107;\r\n}\r\n\r\n.notification.info {\r\n\tbackground-color: #d1ecf1;\r\n\tborder-left: 4px solid #17a2b8;\r\n}\r\n\r\n.icon {\r\n\tmargin-right: 12px;\r\n\tfont-size: 24px;\r\n}\r\n\r\n/* Animations */\r\n@keyframes fadeIn {\r\n\tfrom {\r\n\t\topacity: 0;\r\n\t\ttransform: translateY(20px);\r\n\t}\r\n\tto {\r\n\t\topacity: 1;\r\n\t\ttransform: translateY(0);\r\n\t}\r\n}\r\n\r\n@keyframes fadeOut {\r\n\tfrom {\r\n\t\topacity: 1;\r\n\t\ttransform: translateY(0);\r\n\t}\r\n\tto {\r\n\t\topacity: 0;\r\n\t\ttransform: translateY(20px);\r\n\t}\r\n}\r\n\r\n.title {\r\n\tfont-weight: bold;\r\n\tmargin-bottom: 4px;\r\n}\r\n\r\n.message {\r\n\tfont-size: 14px;\r\n}\r\n";
+styleInject(css_248z);
+
 var WebNotify = function WebNotify(_ref) {
   var _ref$type = _ref.type,
     type = _ref$type === void 0 ? "info" : _ref$type,
     _ref$position = _ref.position,
     position = _ref$position === void 0 ? "top-right" : _ref$position,
     title = _ref.title,
-    message = _ref.message;
+    message = _ref.message,
+    _ref$duration = _ref.duration,
+    duration = _ref$duration === void 0 ? 5000 : _ref$duration;
   var _useState = React.useState(true),
     _useState2 = _slicedToArray(_useState, 2),
     visible = _useState2[0],
     setVisible = _useState2[1];
-  var duration = 5000; // Default duration of 5 seconds
-
   React.useEffect(function () {
     var timer = setTimeout(function () {
       return setVisible(false);
@@ -120,51 +150,62 @@ var WebNotify = function WebNotify(_ref) {
     return function () {
       return clearTimeout(timer);
     };
-  }, []);
+  }, [duration]);
   if (!visible) return null;
-  var positionStyles = _objectSpread2({
-    top: position.includes("top") ? "20px" : "",
-    bottom: position.includes("bottom") ? "20px" : "",
-    left: position.includes("left") ? "20px" : "",
-    right: position.includes("right") ? "20px" : ""
-  }, position.includes("center") && {
+
+  // Positioning styles
+  var positionStyles = _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({
+    position: "fixed",
+    zIndex: 9999,
+    padding: "16px",
+    maxWidth: "350px",
+    transition: "all 0.3s ease-in-out",
+    animationDelay: "0s, ".concat(duration / 1000 - 0.5, "s")
+  }, position.includes("top") && {
+    top: "20px"
+  }), position.includes("bottom") && {
+    bottom: "20px"
+  }), position.includes("left") && {
+    left: "20px"
+  }), position.includes("right") && {
+    right: "20px"
+  }), position.includes("center") && {
     left: "50%",
     transform: "translateX(-50%)"
+  }), position === "top-center" && {
+    top: "20px"
+  }), position === "bottom-center" && {
+    bottom: "20px"
   });
+
+  // Choose the icon based on notification type
   var getIcon = function getIcon(type) {
     switch (type) {
       case "success":
         return "✅";
+      // Success icon
       case "error":
         return "❌";
+      // Error icon
       case "warning":
         return "⚠️";
+      // Warning icon
       case "info":
       default:
         return "ℹ️";
+      // Info icon
     }
   };
-  var notificationStyles = _objectSpread2({
-    position: "fixed",
-    zIndex: 9999,
-    borderRadius: "10px",
-    padding: "10px",
-    backgroundColor: "white",
-    display: "flex",
-    alignItems: "center",
-    borderLeft: "5px solid ".concat(type === "success" ? "green" : type === "error" ? "red" : type === "warning" ? "orange" : "blue")
-  }, positionStyles);
   return /*#__PURE__*/React__default["default"].createElement("div", {
-    style: notificationStyles
+    className: "notification ".concat(type),
+    style: positionStyles
   }, /*#__PURE__*/React__default["default"].createElement("span", {
-    style: {
-      marginRight: "10px"
-    }
-  }, getIcon(type)), /*#__PURE__*/React__default["default"].createElement("div", null, /*#__PURE__*/React__default["default"].createElement("strong", {
-    style: {
-      display: "block"
-    }
-  }, title), /*#__PURE__*/React__default["default"].createElement("span", null, message)));
+    className: "icon"
+  }, getIcon(type)), /*#__PURE__*/React__default["default"].createElement("div", null, /*#__PURE__*/React__default["default"].createElement("div", {
+    className: "title"
+  }, title), /*#__PURE__*/React__default["default"].createElement("div", {
+    className: "message"
+  }, message)));
 };
 
 var webNotify = function webNotify(_ref) {

@@ -1,9 +1,10 @@
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import { babel } from "@rollup/plugin-babel";
+import postcss from "rollup-plugin-postcss"; // Import the postcss plugin
 
 export default {
-	input: "src/index.jsx", // Entry point for your package (ensure the correct file name)
+	input: "src/index.jsx", // Entry point for your package
 	output: {
 		file: "dist/index.js",
 		format: "cjs", // CommonJS format
@@ -14,10 +15,11 @@ export default {
 		commonjs(), // Converts CommonJS to ES6
 		babel({
 			babelHelpers: "bundled",
-			exclude: "node_modules/**", // Exclude node_modules from being transpiled
-			extensions: [".js", ".jsx"], // Add .jsx as a recognized extension
-			presets: ["@babel/preset-react"], // Transform JSX
+			exclude: "node_modules/**",
+			extensions: [".js", ".jsx"],
+			presets: ["@babel/preset-react"],
 		}),
+		postcss(), // Use postcss to handle CSS imports
 	],
-	external: ["react", "react-dom"], // Don't bundle React or ReactDOM
+	external: ["react", "react-dom"], // Prevent React from being bundled
 };
