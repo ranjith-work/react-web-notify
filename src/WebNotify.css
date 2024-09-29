@@ -1,37 +1,66 @@
+/* The notification container should be positioned in the top-right and use flexbox for stacking */
+#web-notification-root {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: 9999; /* Ensure it is on top of other elements */
+	display: flex;
+	flex-direction: column; /* Stack notifications vertically */
+	gap: 10px; /* Adds space between each notification */
+}
+
+/* Style individual notifications */
 .notification {
 	display: flex;
 	align-items: center;
 	padding: 16px;
 	border-radius: 8px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	opacity: 1;
+	background-color: white;
+	width: 300px; /* Adjust width as necessary */
 	animation: fadeIn 0.5s ease-in, fadeOut 0.5s ease-out forwards;
-	animation-delay: 0s, 4.5s; /* Delay the fadeOut animation */
+	animation-delay: 0s, 4.5s;
 }
 
+/* Success Notification */
 .notification.success {
 	background-color: #d4edda;
 	border-left: 4px solid #28a745;
 }
 
+/* Error Notification */
 .notification.error {
 	background-color: #f8d7da;
 	border-left: 4px solid #dc3545;
 }
 
+/* Warning Notification */
 .notification.warning {
 	background-color: #fff3cd;
 	border-left: 4px solid #ffc107;
 }
 
+/* Info Notification */
 .notification.info {
 	background-color: #d1ecf1;
 	border-left: 4px solid #17a2b8;
 }
 
+/* The notification icon */
 .icon {
 	margin-right: 12px;
 	font-size: 24px;
+}
+
+/* Title styling */
+.title {
+	font-weight: bold;
+	margin-bottom: 4px;
+}
+
+/* Message styling */
+.message {
+	font-size: 14px;
 }
 
 /* Animations */
@@ -55,13 +84,4 @@
 		opacity: 0;
 		transform: translateY(20px);
 	}
-}
-
-.title {
-	font-weight: bold;
-	margin-bottom: 4px;
-}
-
-.message {
-	font-size: 14px;
 }
