@@ -25,7 +25,7 @@ const NotificationManager = () => {
 	// Function to add new notification
 	const addNotification = ({
 		type,
-		position,
+		position = "top-right", // Default position if not specified
 		title,
 		message,
 		duration = 5000,
@@ -54,8 +54,12 @@ const NotificationManager = () => {
 		managerResolve(); // Resolve when the manager is ready
 	}, []);
 
+	// Get the first notification's position to apply the class dynamically to the container
+	const notificationPosition =
+		notifications.length > 0 ? notifications[0].position : "top-right";
+
 	return (
-		<div className="notification-container">
+		<div className={`notification-container ${notificationPosition}`}>
 			{notifications.map(({ id, type, position, title, message, duration }) => (
 				<WebNotify
 					key={id}

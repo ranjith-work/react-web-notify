@@ -5,6 +5,7 @@ const WebNotify = ({
 	type = "info", // Default type is info
 	title,
 	message,
+	position = "top-right", // Default to top-right
 	duration = 5000, // Make duration configurable, default to 5 seconds
 }) => {
 	const [visible, setVisible] = useState(true);
@@ -32,7 +33,7 @@ const WebNotify = ({
 	};
 
 	return (
-		<div className={`notification ${type}`}>
+		<div className={`notification ${type} ${position}`}>
 			<span className="icon">{getIcon(type)}</span>
 			<div>
 				<div className="title">{title}</div>
