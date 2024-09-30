@@ -28,11 +28,12 @@ const NotificationManager = () => {
 		position = "top-right", // Default position if not specified
 		title,
 		message,
+		titleIcon, // New prop for dynamic titleIcon
 		duration = 5000,
 	}) => {
 		const id = Date.now();
 		setNotifications((prevNotifications) => [
-			{ id, type, position, title, message, duration },
+			{ id, type, position, title, message, titleIcon, duration },
 			...prevNotifications, // Add new notification on top
 		]);
 
@@ -60,16 +61,19 @@ const NotificationManager = () => {
 
 	return (
 		<div className={`notification-container ${notificationPosition}`}>
-			{notifications.map(({ id, type, position, title, message, duration }) => (
-				<WebNotify
-					key={id}
-					type={type}
-					position={position}
-					title={title}
-					message={message}
-					duration={duration}
-				/>
-			))}
+			{notifications.map(
+				({ id, type, position, title, message, titleIcon, duration }) => (
+					<WebNotify
+						key={id}
+						type={type}
+						position={position}
+						title={title}
+						message={message}
+						titleIcon={titleIcon} // Pass the titleIcon prop to WebNotify
+						duration={duration}
+					/>
+				)
+			)}
 		</div>
 	);
 };

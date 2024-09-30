@@ -39,7 +39,6 @@
 	left: 20px;
 }
 
-/* Individual notification styling */
 .notification {
 	display: flex;
 	align-items: center;
@@ -50,26 +49,6 @@
 	width: 300px;
 	animation: fadeIn 0.5s ease-in, fadeOut 0.5s ease-out forwards;
 	animation-delay: 0s, 4.5s;
-}
-
-.notification.success {
-	background-color: #d4edda;
-	border-left: 4px solid #28a745;
-}
-
-.notification.error {
-	background-color: #f8d7da;
-	border-left: 4px solid #dc3545;
-}
-
-.notification.warning {
-	background-color: #fff3cd;
-	border-left: 4px solid #ffc107;
-}
-
-.notification.info {
-	background-color: #d1ecf1;
-	border-left: 4px solid #17a2b8;
 }
 
 /* Icon and text styling */

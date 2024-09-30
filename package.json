@@ -1,9 +1,27 @@
 {
 	"name": "react-web-notify",
 	"version": "1.0.0",
+	"description": "A react plugin to show notifications in a simple way.",
 	"main": "dist/index.js",
 	"scripts": {
 		"build": "rollup -c"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ranjith-work/react-web-notify.git"
+	},
+	"keywords": [
+		"react",
+		"notification",
+		"toast",
+		"alert",
+		"push"
+	],
+	"author": "Ranjith Kumar Kakkarayil",
+	"license": "MIT",
+	"homepage": "https://ranjith-work.github.io/plugin-demo/#/react-web-notify-demo",
+	"bugs": {
+		"url": "https://github.com/ranjith-work/react-web-notify/issues"
 	},
 	"peerDependencies": {
 		"react": "^17.0.0 || ^18.0.0",

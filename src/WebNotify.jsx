@@ -6,6 +6,7 @@ const WebNotify = ({
 	title,
 	message,
 	position = "top-right", // Default to top-right
+	titleIcon, // Dynamic titleIcon
 	duration = 5000, // Make duration configurable, default to 5 seconds
 }) => {
 	const [visible, setVisible] = useState(true);
@@ -17,8 +18,8 @@ const WebNotify = ({
 
 	if (!visible) return null;
 
-	// Choose the icon based on notification type
-	const getIcon = (type) => {
+	// Choose the default icon based on notification type
+	const getDefaultIcon = (type) => {
 		switch (type) {
 			case "success":
 				return "✅"; // Success icon
@@ -34,7 +35,8 @@ const WebNotify = ({
 
 	return (
 		<div className={`notification ${type} ${position}`}>
-			<span className="icon">{getIcon(type)}</span>
+			{/* Use dynamic titleIcon if provided, otherwise fallback to default */}
+			<span className="icon">{titleIcon || getDefaultIcon(type)}</span>
 			<div>
 				<div className="title">{title}</div>
 				<div className="message">{message}</div>
