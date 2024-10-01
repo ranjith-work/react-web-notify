@@ -1,6 +1,6 @@
 # React Web Notify
 
-React-Wen-Notify is a highly customizable notification widget component built with React. It allows to have simple and easy web notifications in a web application.
+React-Web-Notify is a highly customizable notification widget component built with React. It allows to have simple and easy web notifications in a web application.
 
 ## Features
 
