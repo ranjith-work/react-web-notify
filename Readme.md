@@ -37,9 +37,7 @@ function App() {
 
   return (
     <div>
-      <button onClick={handleShowNotification}>
-						Show Notification
-					</button>
+      <button onClick={handleShowNotification}>Show Notification</button>
     </div>
   );
 }
