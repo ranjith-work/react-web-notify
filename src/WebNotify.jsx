@@ -34,12 +34,12 @@ const WebNotify = ({
 	};
 
 	return (
-		<div className={`notification ${type} ${position}`}>
+		<div className={`rwn-notification ${type} ${position}`}>
 			{/* Use dynamic titleIcon if provided, otherwise fallback to default */}
-			<span className="icon">{titleIcon || getDefaultIcon(type)}</span>
+			<span className="rwn-icon">{titleIcon || getDefaultIcon(type)}</span>
 			<div>
-				<div className="title">{title}</div>
-				<div className="message">{message}</div>
+				<div className="rwn-title">{title}</div>
+				<div className="rwn-message">{message}</div>
 			</div>
 		</div>
 	);

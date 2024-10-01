@@ -60,7 +60,7 @@ const NotificationManager = () => {
 		notifications.length > 0 ? notifications[0].position : "top-right";
 
 	return (
-		<div className={`notification-container ${notificationPosition}`}>
+		<div className={`rwn-notification-container ${notificationPosition}`}>
 			{notifications.map(
 				({ id, type, position, title, message, titleIcon, duration }) => (
 					<WebNotify

@@ -1,5 +1,5 @@
 /* Dynamic positioning based on the selected position */
-.notification-container {
+.rwn-notification-container {
 	position: fixed;
 	z-index: 9999;
 	display: flex;
@@ -7,39 +7,39 @@
 	gap: 10px;
 }
 
-.notification-container.top-right {
+.rwn-notification-container.top-right {
 	top: 20px;
 	right: 20px;
 }
 
-.notification-container.top-center {
+.rwn-notification-container.top-center {
 	top: 20px;
 	left: 50%;
 	transform: translateX(-50%);
 }
 
-.notification-container.top-left {
+.rwn-notification-container.top-left {
 	top: 20px;
 	left: 20px;
 }
 
-.notification-container.bottom-right {
+.rwn-notification-container.bottom-right {
 	bottom: 20px;
 	right: 20px;
 }
 
-.notification-container.bottom-center {
+.rwn-notification-container.bottom-center {
 	bottom: 20px;
 	left: 50%;
 	transform: translateX(-50%);
 }
 
-.notification-container.bottom-left {
+.rwn-notification-container.bottom-left {
 	bottom: 20px;
 	left: 20px;
 }
 
-.notification {
+.rwn-notification {
 	display: flex;
 	align-items: center;
 	padding: 16px;
@@ -52,17 +52,17 @@
 }
 
 /* Icon and text styling */
-.icon {
+.rwn-icon {
 	margin-right: 12px;
 	font-size: 24px;
 }
 
-.title {
+.rwn-title {
 	font-weight: bold;
 	margin-bottom: 4px;
 }
 
-.message {
+.rwn-message {
 	font-size: 14px;
 }
 

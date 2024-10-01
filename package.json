@@ -1,6 +1,6 @@
 {
 	"name": "react-web-notify",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "A react plugin to show notifications in a simple way.",
 	"main": "dist/index.js",
 	"scripts": {
